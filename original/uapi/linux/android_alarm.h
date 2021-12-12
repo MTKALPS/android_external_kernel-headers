@@ -1,3 +1,8 @@
+/*
+* Copyright (C) 2014 MediaTek Inc.
+* Modification based on code covered by the mentioned copyright
+* and/or permission notice(s).
+*/
 /* drivers/staging/android/uapi/android_alarm.h
  *
  * Copyright (C) 2006-2007 Google, Inc.
@@ -29,6 +34,8 @@ enum android_alarm_type {
 
 	ANDROID_ALARM_TYPE_COUNT,
 
+	ANDROID_ALARM_POWER_ON = 6,
+	ANDROID_ALARM_POWER_ON_LOGO = 7,
 	/* return code bit numbers */
 	/* ANDROID_ALARM_TIME_CHANGE = 16 */
 };
@@ -58,5 +65,10 @@ enum android_alarm_return_flags {
 #define ANDROID_ALARM_SET_RTC               _IOW('a', 5, struct timespec)
 #define ANDROID_ALARM_BASE_CMD(cmd)         (cmd & ~(_IOC(0, 0, 0xf0, 0)))
 #define ANDROID_ALARM_IOCTL_TO_TYPE(cmd)    (_IOC_NR(cmd) >> 4)
+#define ANDROID_ALARM_GET_POWER_ON          _IOR('a', 7, struct rtc_wkalrm)
+#define ANDROID_ALARM_SET_IPO(type)             ALARM_IOW(8, type, struct timespec)
+#define ANDROID_ALARM_SET_AND_WAIT_IPO(type)    ALARM_IOW(9, type, struct timespec)
+#define ANDROID_ALARM_GET_POWER_ON_IPO          _IOR('a', 10, struct rtc_wkalrm)
+#define ANDROID_ALARM_WAIT_IPO                  _IO('a', 11)
 
 #endif
